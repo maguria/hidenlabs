@@ -1,0 +1,21 @@
+<?php
+require '../clases/AutoCarga.php';
+header('Content-Type: application/json');
+$sesion = new Session();
+$bd = new Database();
+$usuario=new Usuarios();
+$cuenta=new Cuentas();
+$cliente=new Clientes();
+$accion=new Acciones();
+$web=new Webs();
+$gestorGrupos=new GestorGrupos($bd);
+$gestorWebs=new GestorWebs($bd);
+$grupos=$gestorGrupos->getListadoGruposJson();
+$webs=$gestorWebs->getListadoWebs();
+$websJson=$gestorWebs->getListadoWebsJson();
+$cuenta=$cuenta->getJsonSinId();
+$usuario=$usuario->getJsonSinId();
+$cliente=$cliente->getJsonSinId();
+$web=$web->getJsonSinId();
+$accion=$accion->getJsonSinId();
+echo '{"usuario":'.$usuario.',"cuenta":'.$cuenta.',"grupos":'.$grupos.',"cliente":'.$cliente.',"web":'.$web.',"accion":'.$accion.',"webs":'.$websJson.'}';
